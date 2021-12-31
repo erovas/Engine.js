@@ -1,0 +1,33 @@
+canvas-stack {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+    user-select: none;
+    padding: 0;
+    margin: 0;
+}
+
+canvas-stack * {
+    display: none;
+}
+
+canvas-stack .auto {
+    image-rendering: auto;
+}
+
+canvas-stack .pixelated {
+    -ms-interpolation-mode: nearest-neighbor;   /* IE8+           */
+    image-rendering: pixelated;                 /* CSS4 Proposed  */
+}
+
+canvas-stack .crisp-edges {
+    -ms-interpolation-mode: bicubic;            /* Old IE*/
+    -moz-image-rendering: crisp-edges;
+    image-rendering: optimizeSpeed;             /* Legal fallback */
+    image-rendering: -moz-crisp-edges;          /* Firefox        */
+    image-rendering: -o-crisp-edges;            /* Opera          */
+    image-rendering: -webkit-optimize-contrast; /* Safari         */
+    image-rendering: optimize-contrast;         /* CSS3 Proposed  */
+    image-rendering: crisp-edges;               /* CSS4 Proposed  */
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--  NO permitir Zoom en movil-->
+    <!--<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1, minimum-scale=1">-->
+    <!-- SI permitir Zoom en movil-->
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1">
+
+    <meta name="keywords" content="JavaScript, library, internet explorer, Engine">
+    <meta name="description" content="">
+    <meta name="author" content="Emanuel Rojas Vasquez">
+
+    <title>Engine.js</title>
+
+    <!-- You can find it in https://github.com/erovas/Import.js -->
+    <script src="https://erovas.github.io/Import.js/Import.js"></script>
+
+    <script src="Polyfills.js"></script>
+    <script src="Libraries.js"></script>
+
+    <style>
+        * , *::after, *::before {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        html { 
+            height:100%; 
+            width:100%; 
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            max-height: 100vh;
+            background: #111;
+        }
+
+        canvas-stack {
+            background-color: aquamarine;
+        }
+
+    </style>
+
+</head>
+<body>
+    <div style="position: fixed; z-index: 90; top: 10px; left: 10px; color: azure;">
+        <span>X:</span><span id="XX"></span><br>
+        <span>Y:</span><span id="YY"></span><br>
+        <span>Xl:</span><span id="XXl"></span><br>
+        <span>Yl:</span><span id="YYl"></span><br>
+        <span>FPS:</span><span id="_fps_"></span><br>
+    </div>
+    
+
+    <canvas-stack width="256" height="224" rendering="pixelated" style="width: 512px; height: 448px;"></canvas-stack>
+    
+    
+    <!--<input-range class="firefox"></input-range>-->
+
+</body>
+</html>
