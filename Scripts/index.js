@@ -9,18 +9,30 @@ CanvasStack.onmousemove = function(e){
 }
 
 let layer_1 = CanvasStack.createLayer();
-let ctx_1 = layer_1.getContext('2d');
+// alpha: transparencia, desynchronized: ???
+let ctx_1 = layer_1.getContext('2d', { alpha: true, desynchronized: false });
 
 ctx_1.imageSmoothingEnabled = false;
+ctx_1.mozImageSmoothingEnabled = false;
+ctx_1.oImageSmoothingEnabled = false;
+ctx_1.webkitImageSmoothingEnabled = false;
 
 let objeto = new GObject({
-    x: 15, 
-    y: 20, 
-    width: 20, 
-    height: 22
+    x: 0, 
+    y: 160, 
+    width: 16, 
+    height: 16
 });
 
-objeto.draw(ctx_1, 'black');
+
+
+objeto.drawEdges(ctx_1, 'black');
+objeto.y = 176;
+objeto.drawEdges(ctx_1, 'green');
+objeto.y = 192;
+objeto.drawEdges(ctx_1, 'red');
+
+//ctx_1.rotate(45 * Math.PI / 180)
 
 let sprites = []
 
@@ -77,7 +89,20 @@ let MarioSprite = new Sprite({
     fps: 6
 });
 
-console.log(MarioSprite._animations);
+//console.log(MarioSprite._animations);
+
+let keyboard = new InputKey();
+keyboard.init();
+
+let mario = new Player({
+
+    width: 15,
+    height: 15,
+    y: 96 || 32,
+    x: 45 || 32,
+    keydown: keyboard.keydown,
+    keyup: keyboard.keyup
+});
 
 setTimeout(function(){
     MarioSprite.fps = 12;
@@ -90,39 +115,70 @@ setTimeout(function(){
 
 setTimeout(function(){
     MarioSprite.animation = "walk-left"
-    MarioSprite.speed = 200;
-    MLX.dev.speed = 200;
-    MLX.dev.step = 144;
+    //MarioSprite.speed = 200;
+    MarioSprite.flipX = true;
+    //MLX.dev.speed = 200;
+    //MLX.dev.step = 144;
 }, 8000);
 
 
 MLX.update = function(s){
 
-    XX.textContent = s;
+    //XX.textContent = s;
     //sprite.update();
     sprites.forEach(function(sprite){
         sprite.update();
     });
 
-    MarioSprite.update();
-    
+    MarioSprite.updateReverse();
+
+    mario.update(s/1000);
+
+
 };
 MLX.draw = function(){
+    ctx_1.clearRect(0, 0, CanvasStack.width, CanvasStack.height);
+    //ctx_1.setTransform(1, 0, 0, 1, 0, 0);
+    //ctx_1.rotate(45 * Math.PI / 180)
 
     let x = 0
 
     for (let i = 0; i < 8; i++) {
-        sprites[i].draw(ctx_1, x, 0);
-        x = x + 32;
+        //sprites[i].angle = 45
+        //sprites[i].flipY = true;
+        sprites[i].flipX = true;
+        sprites[i].draw(ctx_1, x, 0, 16, 16);
+        x = x + 16;
     }
 
-    x = 16
+    x = 0
     for (let i = 8; i < 16; i++) {
-        sprites[i].draw(ctx_1, x, 16);
-        x = x + 32;
+        sprites[i].flipY = true;
+        sprites[i].draw(ctx_1, x, 112);
+        x = x + 16;
     }
+
+    //ctx_1.fillRect(0,0, 128, 16);
+    ctx_1.fillStyle = "yellow";
+    ctx_1.fillRect(0,16, 16, 96);
+    ctx_1.fillRect(112,16, 16, 96);
+    //ctx_1.fillRect(0,1, 128, 16);
+
+    ctx_1.fillRect(48,104, 16, 2);
+    ctx_1.fillRect(48,96, 2, 16);
+    ctx_1.fillRect(64,96, 16, 2);
+    ctx_1.fillRect(80,88, 16, 2);
+
+    ctx_1.fillStyle = "white";
+
 
     MarioSprite.draw(ctx_1, 16, 48);
+    ctx_1.fillRect(0,96, 16, 16);
+
+    mario.draw(ctx_1);
+    mario.drawEdges(ctx_1, 'green')
+    mario.drawPoints(ctx_1, 'red')
+    
 
 };
 
@@ -136,4 +192,23 @@ MLX.end = function(fps, panic){
 MLX.start();
 
 
-MLX.dev.maxFPS = 60;
+//MLX.dev.maxFPS = 60;
+//MLX.dev.steps = 60;
+
+
+let entidad = {}
+
+function actualizar (dt){
+
+
+    if(entidad.right){
+        //Vel_final = Vel_inicial + (Aceleracion * tiempo)
+        entidad.dx += entidad.ddx * dt;
+    }
+    else if(entidad.left){
+        //Vel_final = Vel_inicial - (Aceleracion * tiempo)
+        entidad.dx -= entidad.ddx * dt;
+    }
+
+
+}

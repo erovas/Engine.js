@@ -21,13 +21,14 @@ if(!0) {
     Import.CSS('Styles/canvas-stack');
 
     Import.JS('Scripts/Utils');
-    Import.JS('Scripts/GObject');
-    Import.JS('Scripts/Entity');
-    Import.JS('Scripts/Sprite');
-    Import.JS('Scripts/ColliderMap');
+    Import.JS('Scripts/GObject2');
+    Import.JS('Scripts/Entity2');
+    Import.JS('Scripts/Sprite2');
+    Import.JS('Scripts/ColliderTile');
+    Import.JS('Scripts/TileSet');
     
-    Import.JS('Scripts/InputKey');
-    Import.JS('Scripts/Player');
+    Import.JS('Scripts/InputKey2');
+    Import.JS('Scripts/Player2');
     
-    Import.JS('Scripts/index');
+    Import.JS('Scripts/index2');
 }

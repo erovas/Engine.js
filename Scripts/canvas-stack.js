@@ -156,10 +156,10 @@
     CanvasRenderingContext2D.prototype.LineRect = function(px, py, width, height, color){
         let that = this;
         that.fillStyle = color;
-        that.fillRect(px, py, width, 1);
-        that.fillRect(px, py, 1, height);
-        that.fillRect(px + width, py, 1, height);
-        that.fillRect(px, py + height, width + 1, 1);
+        that.fillRect(px, py, width, 1);                // ¯¯¯
+        that.fillRect(px, py, 1, height);               // |
+        that.fillRect(px + width - 1, py, 1, height);   //    |
+        that.fillRect(px, py + height - 1, width, 1);   // ___
     }
 
     CanvasRenderingContext2D.prototype.circle = function(x, y, r, fillStyle) {

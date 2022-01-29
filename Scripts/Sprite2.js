@@ -2,7 +2,7 @@
  * Classe basica que representa un Sprite
  * Copyright (c) 2022, Emanuel Rojas Vásquez
  */
-window.Sprite = Clazz({
+var Sprite = Clazz({
     
     Constructor: function(config) {
         let that = this;
